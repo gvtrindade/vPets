@@ -1,15 +1,16 @@
-import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import "./globals.css";
 import {
-  Bars3Icon,
-  EllipsisHorizontalIcon,
   FolderIcon,
   GlobeAltIcon,
   PlayIcon,
   UserIcon,
 } from "@heroicons/react/24/outline";
+import type { Metadata } from "next";
+import { Inter } from "next/font/google";
 import Link from "next/link";
+
+import "./globals.css";
+import { DesktopMenu } from "./ui/desktopMenu";
+import { MobileMenu } from "./ui/mobileMenu";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -21,7 +22,7 @@ export const metadata: Metadata = {
   description: "The latest virtual pets game!",
 };
 
-const IconSize = "size-10";
+const iconSize = "size-10";
 
 export default function RootLayout({
   children,
@@ -32,40 +33,38 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <header className="flex justify-between items-center py-4 px-4 bg-pink">
-          <Bars3Icon className="size-12 opacity-0 md:opacity-100" />
+          <DesktopMenu />
 
           <h4 className="pl-10">
             <Link href="/">VPets</Link>
           </h4>
 
           <div>
-            <p>00:00:00</p>
+            <p>00:00</p>
             <p className="text-[10px] text-right"> UST</p>
           </div>
         </header>
 
-        <main className="mt-6 px-4">{children}</main>
+        <main className="mt-6 px-4 pb-20">{children}</main>
 
-        <footer className="bg-pink py-2 px-4 absolute w-full bottom-6 md:hidden">
+        <footer className="bg-pink py-2 px-4 fixed w-full bottom-6 md:hidden">
           <div
             id="icons"
             className="flex justify-between items-center z-20 relative"
           >
             <Link href="/pets">
-              <UserIcon className={`${IconSize}`} />
+              <UserIcon className={`${iconSize}`} />
             </Link>
             <Link href="/inventory">
-              <FolderIcon className={`${IconSize}`} />
+              <FolderIcon className={`${iconSize}`} />
             </Link>
-            <Link href="/pets">
-              <GlobeAltIcon className={`${IconSize}`} />
+            <Link href="/mythara/westkey-village">
+              <GlobeAltIcon className={`${iconSize}`} />
             </Link>
             <Link href="/games">
-              <PlayIcon className={`${IconSize}`} />
+              <PlayIcon className={`${iconSize}`} />
             </Link>
-            <Link href="/settings">
-              <EllipsisHorizontalIcon className={`${IconSize}`} />
-            </Link>
+            <MobileMenu />
           </div>
           <div
             id="center-circle"
