@@ -1,30 +1,28 @@
 import Link from "next/link";
+import { PetListing } from "@/app/lib/definitions";
+import { fetchPetsByUser } from "@/app/lib/data/pet";
+import Heading from "@/app/ui/heading";
+import { auth } from "@/auth";
 
-export type Pet_type = {
-  id: number;
-  name: string;
-}
+export default async function Page() {
+  const session = await auth();
 
-export type Pet = {
-  id: string;
-  name: string;
-  hp: number;
-  intelligence: number;
-  hunger: number;
-  appearance: JSON;
-  pet_type_id: number;
-}
+  if (!session) return null;
 
-export default function Page() {
-  const pets = ["dog"];
+  const pets: PetListing[] = await fetchPetsByUser(session.user!.id!);
 
   return (
     <>
-      <h3>Pets</h3>
+      <Heading>Pets</Heading>
+      <br />
+
       <ul>
         {pets.map((pet) => (
-          <li key={pet}>
-            <Link href={`/pets/${pet}`}>{pet}</Link>
+          <li key={pet.name}>
+            <Link href={`/pets/${pet.name}`}>
+              <img src={pet.appearance.src || ""} className="size-24 mx-auto" />
+              <p className="text-center">{pet.name}</p>
+            </Link>
           </li>
         ))}
       </ul>
