@@ -8,14 +8,15 @@ CREATE TABLE "user" (
 	-- User's password
 	password VARCHAR NOT NULL,
 	-- User's email
-	email VARCHAR NOT NULL,
+	email VARCHAR NOT NULL UNIQUE,
 	-- State of user's account
 	is_deleted BOOLEAN NOT NULL DEFAULT false,
 	-- User's number of coins
 	coins INTEGER NOT NULL DEFAULT 0,
 	-- User's account creation date
 	created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
-	is_admin BOOLEAN NOT NULL DEFAULT false
+	is_admin BOOLEAN NOT NULL DEFAULT false,
+	is_validated BOOLEAN NOT NULL DEFAULT false
 );
 COMMENT ON COLUMN "user".id IS 'User''s id';
 COMMENT ON COLUMN "user".username IS 'User''s name';
@@ -24,6 +25,16 @@ COMMENT ON COLUMN "user".email IS 'User''s email';
 COMMENT ON COLUMN "user".is_deleted IS 'State of user''s account';
 COMMENT ON COLUMN "user".coins IS 'User''s number of coins';
 COMMENT ON COLUMN "user".created_at IS 'User''s account creation date';
+COMMENT ON COLUMN "user".is_admin IS 'User''s admin status';
+COMMENT ON COLUMN "user".is_validated IS 'User''s validation status';
+
+
+CREATE TABLE user_token (
+	id SERIAL NOT NULL PRIMARY KEY,
+	user_id UUID NOT NULL,
+	-- Token for user
+	token UUID NOT NULL
+)
 
 
 CREATE TABLE pet_type (
@@ -40,7 +51,7 @@ CREATE TABLE pet (
 	-- Pet's ID
 	id UUID NOT NULL DEFAULT uuid_generate_v4() PRIMARY KEY,
 	-- Pet's name given by a user
-	name VARCHAR NOT NULL,
+	name VARCHAR NOT NULL UNIQUE,
 	-- Pet's current health points
 	hp INTEGER NOT NULL DEFAULT 10,
 	-- Pet's max health points
@@ -132,6 +143,10 @@ COMMENT ON COLUMN game.url IS 'Location of the game to be loaded for the user';
 
 
 -- ADD CONTRAINTS --
+ALTER TABLE user_token
+ADD CONSTRAINT fk_user_user_token FOREIGN KEY(user_id) REFERENCES "user"(id)
+ON UPDATE CASCADE ON DELETE CASCADE;
+
 ALTER TABLE pet
 ADD CONSTRAINT fk_pet_pet_type FOREIGN KEY(pet_type_id) REFERENCES pet_type (id)
 ON UPDATE CASCADE ON DELETE CASCADE;
