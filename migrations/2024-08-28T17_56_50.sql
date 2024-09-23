@@ -33,8 +33,9 @@ CREATE TABLE user_token (
 	id SERIAL NOT NULL PRIMARY KEY,
 	user_id UUID NOT NULL,
 	-- Token for user
-	token UUID NOT NULL
-)
+	"token" UUID NOT NULL,
+	created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
 
 
 CREATE TABLE pet_type (
