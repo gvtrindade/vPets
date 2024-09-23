@@ -1,18 +1,15 @@
 "use client";
 
+import { signUp } from "@/app/lib/action/auth";
+import { passwordValidationRegex } from "@/app/lib/util";
 import { TextField } from "@/app/ui/FormFields/TextField";
 import Heading from "@/app/ui/heading";
 import { Button } from "@/components/ui/button";
 import { Form } from "@/components/ui/form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { signUp } from "@/app/lib/action/auth";
-import { useRouter } from "next/navigation";
-
-const passwordValidation = new RegExp(
-  /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-\\(\\)]).{8,}$/
-);
 
 const formSchema = z
   .object({
@@ -25,7 +22,7 @@ const formSchema = z
       .string()
       .min(8, { message: "Password must be at least 8 characters long" })
       .max(20, { message: "Password must be at most 20 characters long" })
-      .regex(passwordValidation, {
+      .regex(passwordValidationRegex, {
         message:
           "Password must contain at least: one uppercase letter, one lowercase letter, one number, and one special character",
       }),
@@ -47,7 +44,7 @@ export default function Page() {
   });
 
   const submitForm = async (values: SchemaProps) => {
-    // await signUp(values);
+    await signUp(values);
     router.push("/signup/success");
   };
 

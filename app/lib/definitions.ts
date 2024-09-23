@@ -4,9 +4,9 @@ export type User = {
   password: string;
   email: string;
   coins: number;
-  isDeleted: boolean;
-  isAdmin: boolean;
-  isValidated: boolean;
+  is_deleted: boolean;
+  is_admin: boolean;
+  is_validated: boolean;
 };
 
 export type PetListing = {
@@ -21,10 +21,10 @@ export type Pet = {
   id: string;
   name: string;
   health: number;
-  maxHealth: number;
+  max_health: number;
   intelligence: number;
   hunger: number;
-  maxHunger: number;
+  max_hunger: number;
   appearance: {
     src: string;
   };
@@ -33,18 +33,26 @@ export type Pet = {
 export type Item = {
   id: string;
   tag: string;
-  imgUrl: string;
-  statusEffect: string[];
+  img_url: string;
+  status_effect: string[];
 };
 
 export type UserItem = {
   item: Item;
-  isStored: boolean;
+  is_stored: boolean;
 };
 
 export type NpcItem = {
   item: Item;
-  baseValue: number;
+  base_value: number;
   quantity: number;
-  lastUpdate: Date;
+  last_update: Date;
+};
+
+export type EmailData = {
+  username: string;
+  email: string;
+  token: string;
+  subject: string;
+  template: "signup" | "forgot-password";
 };

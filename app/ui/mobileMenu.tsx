@@ -1,12 +1,16 @@
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { signOut } from "@/auth";
+import {
+  Drawer,
+  DrawerContent,
+  DrawerTitle,
+  DrawerTrigger,
+} from "@/components/ui/drawer";
 import {
   ArrowLeftStartOnRectangleIcon,
   Cog6ToothIcon,
   EllipsisHorizontalIcon,
 } from "@heroicons/react/24/outline";
 import { LinkItem } from "./linkItem";
-import { signOut } from "@/auth";
-import { Drawer, DrawerContent, DrawerTrigger } from "@/components/ui/drawer";
 
 const iconSize = "size-10";
 

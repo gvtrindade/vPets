@@ -19,12 +19,19 @@ export const authConfig = {
     authorized({ auth, request: { nextUrl } }) {
       const isLoggedIn = !!auth?.user;
 
-      const isOnLogin = nextUrl.pathname === "/login";
       const isOnLanding = nextUrl.pathname === "/";
+      const isOnLogin = nextUrl.pathname.includes("/login");
       const isOnSignup = nextUrl.pathname.includes("/signup");
-      if (!isOnLanding && !isOnLogin && !isOnSignup && !isLoggedIn) {
+      const isOnPasswordReset = nextUrl.pathname.includes("/forgot-password");
+      if (
+        !isOnLanding &&
+        !isOnLogin &&
+        !isOnSignup &&
+        !isOnPasswordReset &&
+        !isLoggedIn
+      ) {
         return false;
-      } else if ((isOnLogin || isOnSignup) && isLoggedIn) {
+      } else if ((isOnLogin || isOnSignup || isOnPasswordReset) && isLoggedIn) {
         return Response.redirect(new URL("/pets", nextUrl));
       }
       return true;
