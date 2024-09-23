@@ -82,7 +82,12 @@ export async function validateUser(token: string) {
 }
 
 export async function authenticateToken(token: string) {
-  await getUserByToken(token);
+  try {
+    await getUserByToken(token);
+    return true;
+  } catch (err) {
+    return false;
+  }
 }
 
 export async function forgotPassword(formData: any) {
