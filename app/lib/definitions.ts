@@ -20,15 +20,20 @@ export type PetListing = {
 export type Pet = {
   id: string;
   name: string;
-  health: number;
-  max_health: number;
+  hp: number;
+  max_hp: number;
   intelligence: number;
   hunger: number;
-  max_hunger: number;
   appearance: {
     src: string;
   };
+  pet_type_id: string;
 };
+
+export type PetType = {
+  id: string;
+  name: string;
+}
 
 export type Item = {
   id: string;

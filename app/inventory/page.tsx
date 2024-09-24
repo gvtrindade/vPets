@@ -7,19 +7,19 @@ const items: UserItem[] = [
     item: {
       id: "1",
       tag: "sword",
-      imgUrl: "/sword.png",
-      statusEffect: ["+10 attack"],
+      img_url: "/sword.png",
+      status_effect: ["+10 attack"],
     },
-    isStored: false,
+    is_stored: false,
   },
   {
     item: {
       id: "2",
       tag: "potion",
-      imgUrl: "/potion.png",
-      statusEffect: ["+10 health"],
+      img_url: "/potion.png",
+      status_effect: ["+10 health"],
     },
-    isStored: false,
+    is_stored: false,
   },
 ];
 

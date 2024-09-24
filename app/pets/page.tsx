@@ -12,9 +12,8 @@ export default async function Page() {
   const pets: PetListing[] = await fetchPetsByUser(session.user!.id!);
 
   return (
-    <>
+    <div className="flex flex-col gap-8">
       <Heading>Pets</Heading>
-      <br />
 
       <ul>
         {pets.map((pet) => (
@@ -26,6 +25,8 @@ export default async function Page() {
           </li>
         ))}
       </ul>
-    </>
+
+      <Link href="/pets/new">Get a new pet!</Link>
+    </div>
   );
 }
