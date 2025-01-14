@@ -30,7 +30,7 @@ export async function DesktopMenu() {
   );
 }
 
-export function ItemsWhenLogged() {
+function ItemsWhenLogged() {
   return (
     <>
       <LinkItem href="/pets">

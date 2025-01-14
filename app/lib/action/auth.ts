@@ -16,10 +16,7 @@ import { randomUUID } from "crypto";
 import { sendEmail } from "./email";
 import { EmailData } from "../definitions";
 
-export async function authenticate(
-  prevState: string | undefined,
-  formData: FormData
-) {
+export async function authenticate(formData: FormData) {
   try {
     await signIn("credentials", formData);
   } catch (err) {
